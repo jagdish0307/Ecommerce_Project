@@ -1,3 +1,38 @@
+# Virtual environment
 .ecommerce_env/
+venv/
+
+# Byte-compiled / cache files
 __pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment variables
 .env
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# SQLite databases
+*.db
+
+# CSV and raw data files
+*.csv
+
+# FAISS and embedding files
+*.pkl
+*.index
+
+# Model checkpoints or large binaries
+*.bin
+*.pt
+*.h5
+
+# macOS/Windows/Linux system files
+.DS_Store
+Thumbs.db
+
+# Logs and temp files
+*.log
+*.tmp
