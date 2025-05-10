@@ -1,133 +1,138 @@
-# BuyGenie: AI-Powered Laptop Recommendation System
+# BuyGenie: Your Smart AI-Powered Laptop Shopping Assistant
 
-BuyGenie is an AI-powered e-commerce recommendation system that provides smart, personalized laptop suggestions based on user queries. It uses LLMs, semantic search, and SQLite to deliver accurate and relevant results. The system understands user intent, applies post-filtering, and gives recommendations tailored to user preferences.
+## 🧠 Problem Statement
+
+Buying a laptop online can be overwhelming. With hundreds of options and technical specifications—RAM, GPU, processor, screen size, and more—users often struggle to identify which product truly suits their needs. Conventional e-commerce platforms rely heavily on filters and manual searching, which do not always align with what users *actually* mean or want.
+
+## 🎯 Solution: BuyGenie
+
+**BuyGenie** is an AI-powered e-commerce assistant built using LLMs (Large Language Models) to make laptop shopping intuitive, fast, and personalized. Whether you're a gamer, student, or professional, BuyGenie understands your intent and recommends the best options by deeply analyzing your query, product specs, and even your past behavior.
 
 ---
 
 ## 🚀 Features
 
-* 🧠 **LLM Query Understanding:** Interprets natural language queries like "best gaming laptop under ₹80,000" using `gemma-2-9b-it` (via Groq API).
-* 🔍 **Semantic Search:** Retrieves similar laptop records using vector embeddings (FAISS).
-* 🧾 **Post-Filtering:** Filters results by price, weight, RAM, GPU, etc.
-* 💡 **Personalized Recommendations:** Adapts based on user history (stored in SQLite).
-* 🤖 **LLM Agent:** Handles follow-up questions and acts as a chatbot interface.
-* 📊 **Streamlit UI:** Simple and intuitive frontend for users to interact.
+* 🔍 **Smart Search Understanding**: Interprets natural language queries like "I want a lightweight laptop for travel" or "Best gaming laptop under 70k" using LLMs.
+* 🧠 **LLM-Powered Query Handler**: Maps user queries to technical attributes like weight, GPU, battery life, RAM, etc.
+* 📦 **Semantic Product Retrieval**: Embeds product data and performs semantic search using FAISS to retrieve the most relevant items.
+* 👤 **Personalized Recommendations**: Learns from user interaction history stored in SQLite and enhances future results.
+* 🤖 **Agent Assistant**: Uses a follow-up agent to answer further questions about products, such as "Does this have a backlit keyboard?" or "Which one has the best display?"
 
 ---
 
-## 🗂️ Project Structure
+## 🧱 Tech Stack
+
+| Component       | Technology Used                                    |
+| --------------- | -------------------------------------------------- |
+| Backend         | Python, Flask                                      |
+| Frontend        | Streamlit                                          |
+| Vector Search   | FAISS                                              |
+| Embeddings      | SentenceTransformers                               |
+| LLMs            | `gemma-2-9b-it`, `llama-4-scout-17b`, via Groq API |
+| Database        | SQLite                                             |
+| Version Control | Git, GitHub                                        |
+
+---
+
+## 📂 Project Structure
 
 ```
-BuyGenie Flask-based e-commerce project/
+BuyGenie/
 │
-├── .ecommerce_env/                 # Virtual environment (ignored by git)
-├── .env                            # Stores Groq API key (ignored by git)
-├── .gitignore                      # Specifies untracked files
-├── laptop_prices.csv              # Raw data (ignored by git)
-├── flipkart_data.csv              # Optional data file (ignored by git)
-├── flipkart_cleaned_data.csv      # Cleaned data (ignored by git)
-├── requirements.txt               # Python dependencies
+├── .gitignore
+├── .env
+├── README.md
+├── requirements.txt
+├── laptop_prices.csv
 ├── src/
-│   ├── app.py                      # Streamlit application
-│   ├── data_loader.py             # Loads CSV to SQLite
+│   ├── app.py                      # Streamlit app
+│   ├── agent_handler.py           # Follow-up LLM agent for user Q&A
+│   ├── data_loader.py             # CSV to SQLite loader
 │   ├── db/
-│   │   ├── laptops.db             # Main product DB (ignored by git)
-│   │   └── user_history.db        # User interaction DB (ignored by git)
+│   │   ├── laptops.db             # Product database
+│   │   └── user_history.db        # User query history
 │   ├── embeddings/
-│   │   ├── faiss_index.pkl        # FAISS index (ignored by git)
-│   │   ├── id_map.pkl             # ID mappings (ignored by git)
-│   │   └── laptop_dataframe.pkl   # Dataframe pickle (ignored by git)
-│   ├── llm_query_handler.py       # Handles query understanding
-│   ├── llm_recommendation.py      # Formats natural language recommendations
-│   ├── personalized_recommender.py# Uses user history to refine suggestions
-│   ├── rag_pipeline.py            # Combines LLM, FAISS, DB
-│   ├── search_handler.py          # Semantic search with filtering
-│   ├── user_history.py            # Saves/retrieves user query history
-│   └── vector_store.py            # FAISS vector store operations
-└── testing.ipynb                  # Development/test notebook
+│   │   ├── faiss_index.pkl        # FAISS vector store
+│   │   ├── id_map.pkl             # ID mapping
+│   │   └── laptop_dataframe.pkl   # Product DataFrame
+│   ├── llm_query_handler.py       # Maps natural queries to filters
+│   ├── llm_recommendation.py      # Converts top items into user-friendly descriptions
+│   ├── search_handler.py          # Main handler: query → retrieval → response
+│   └── user_history.py            # Stores and fetches user-specific interaction history
 ```
 
 ---
 
-## 🔧 Setup Instructions
+## 🧠 LLM Workflow
 
-### 1. Clone the Repo
+1. **Query Understanding (via `llm_query_handler.py`)**:
 
-```bash
-git clone https://github.com/jagdish0307/Ecommerce_Project.git
-cd Ecommerce_Project
-```
+   * Uses `gemma-2-9b-it` to extract filters like brand, RAM, GPU, use-case, budget, etc.
 
-### 2. Create and Activate Virtual Environment
+2. **Semantic Search (via `search_handler.py`)**:
 
-```bash
-python -m venv .ecommerce_env
-.ecommerce_env\Scripts\activate    # Windows
-```
+   * Embeds product specs and performs semantic similarity search with FAISS.
 
-### 3. Install Requirements
+3. **Follow-Up Agent (via `agent_handler.py`)**:
 
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Add `.env` File with Groq API Key
-
-```
-Groq_Api_Key=your_groq_api_key_here
-```
+   * Uses `llama-4-scout-17b` to answer detailed user queries post-retrieval.
 
 ---
 
-## 🧪 Run the App
+## 💡 How BuyGenie Helps Users
 
-```bash
-streamlit run src/app.py
-```
+* Eliminates the need to manually set filters
+* Understands vague and non-technical user requests
+* Quickly finds laptops tailored for gaming, travel, office, or editing
+* Learns and adapts over time based on past preferences
+* Supports intelligent conversations for clarification and comparisons
 
 ---
 
-## ⚙️ Git Setup Tips
+## 🛠️ Setup Instructions
 
-* Ignore unnecessary files using `.gitignore`:
+```bash
+# 1. Clone the repo
+$ git clone https://github.com/jagdish0307/Ecommerce_Project.git
+$ cd Ecommerce_Project
 
+# 2. Create virtual environment
+$ python -m venv .ecommerce_env
+$ source .ecommerce_env/bin/activate  # On Windows: .ecommerce_env\Scripts\activate
+
+# 3. Install dependencies
+$ pip install -r requirements.txt
+
+# 4. Set up the environment variables
+Create a `.env` file:
+GROQ_API_KEY=your_key_here
+
+# 5. Launch the app
+$ streamlit run src/app.py
 ```
-.ecommerce_env/
-__pycache__/
-.env
-src/db/
-src/embeddings/
-*.csv
-```
-
-* Git Large File Support (.gitattributes is optional): Use [Git LFS](https://git-lfs.github.com/) for files >50MB.
 
 ---
 
 ## 📌 Notes
 
-* FAISS index and database files are ignored to avoid large Git pushes.
-* Ensure Groq API key is stored securely in `.env`.
-* Use SQLite for storing both product data and user interaction history.
-* LLM model used: `gemma-2-9b-it` via [Groq API](https://console.groq.com/).
+* Make sure `.gitignore` includes `.ecommerce_env/`, `__pycache__/`, `.env`, and any large files (like embeddings).
+* We removed `rag_pipeline.py` and `personalized_recommendation.py` since their logic is already integrated into `search_handler.py` and `agent_handler.py`.
 
 ---
 
-## 📬 Future Enhancements
+## 📬 Future Ideas
 
-* Add product images and rich cards in Streamlit
-* Improve multi-turn conversations with memory
-* Expand support for other product categories
-
----
-
-## 🧑‍💻 Author
-
-**Jagdish Patil**
-GitHub: [@jagdish0307](https://github.com/jagdish0307)
+* Product comparison view
+* Voice-based search
+* Daily trending recommendations
 
 ---
 
-## 📄 License
+## 🙌 Contributors
 
-This project is licensed under the MIT License.
+* Jagdish | [GitHub](https://github.com/jagdish0307)
+
+---
+
+**Enjoy personalized AI laptop shopping with BuyGenie!**
+
