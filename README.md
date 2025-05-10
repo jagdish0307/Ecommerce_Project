@@ -27,7 +27,7 @@ Buying a laptop online can be overwhelming. With hundreds of options and technic
 | Backend         | Python, Flask                                      |
 | Frontend        | Streamlit                                          |
 | Vector Search   | FAISS                                              |
-| Embeddings      | SentenceTransformers                               |
+| Embeddings      | SentenceTransformers  ('all-MiniLM-L6-v2')                             |
 | LLMs            | `gemma-2-9b-it`, `llama-4-scout-17b`, via Groq API |
 | Database        | SQLite                                             |
 | Version Control | Git, GitHub                                        |
@@ -113,12 +113,6 @@ $ streamlit run src/app.py
 
 ---
 
-## 📌 Notes
-
-* Make sure `.gitignore` includes `.ecommerce_env/`, `__pycache__/`, `.env`, and any large files (like embeddings).
-* We removed `rag_pipeline.py` and `personalized_recommendation.py` since their logic is already integrated into `search_handler.py` and `agent_handler.py`.
-
----
 
 ## 📬 Future Ideas
 
