@@ -122,15 +122,17 @@ $ streamlit run src/app.py
 
 ## 📬 Future Ideas
 
-* Product comparison view
+* Product comparison with images
 * Voice-based search
 * Daily trending recommendations
 
 ---
 
-## 🙌 Contributors
+## 🧑‍💻 Author
 
-* Jagdish | [GitHub](https://github.com/jagdish0307)
+**Jagdish**  
+💡 Passionate AI Engineer | Creator of BuyGenie  
+🔗 [GitHub](https://github.com/jagdish0307)
 
 ---
 
