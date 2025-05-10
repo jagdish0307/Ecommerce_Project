@@ -72,8 +72,12 @@ BuyGenie/
 2. **Semantic Search (via `search_handler.py`)**:
 
    * Embeds product specs and performs semantic similarity search with FAISS.
+  
+3. ** Recommendation best for user (via 'recommendation.py')**:
 
-3. **Follow-Up Agent (via `agent_handler.py`)**:
+    * it recommends best laptops in detaild description based on search query
+
+4. **Follow-Up Agent (via `agent_handler.py`)**:
 
    * Uses `llama-4-scout-17b` to answer detailed user queries post-retrieval.
 
