@@ -2,13 +2,18 @@ import pickle
 import json
 import numpy as np
 import pandas as pd
+import faiss
 from sentence_transformers import SentenceTransformer
 from llm_query_handler import understand_query
 
-# Load FAISS index, DataFrame, and model
-with open("embeddings/faiss_index.pkl", "rb") as f:
-    index, df, model = pickle.load(f)
+# Load FAISS index
+index = faiss.read_index("embeddings/faiss.index")
 
+# Load DataFrame
+df = pd.read_pickle("embeddings/laptop_dataframe.pkl")
+
+# Load SentenceTransformer model
+model = SentenceTransformer("all-MiniLM-L6-v2")
 def clean_llm_response(response_text):
     if response_text.startswith("```"):
         response_text = response_text.strip().strip("```").replace("json", "").strip()
@@ -130,4 +135,5 @@ if __name__ == "__main__":
 
     for q in queries:
         print("="*80)
+        print(search_laptops(q))
         print(search_laptops(q))
