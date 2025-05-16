@@ -1,12 +1,18 @@
-# BuyGenie: Your Smart AI-Powered Laptop Shopping Assistant
+# Smart AI-powered laptop recommendation assistant
 
 ## 🧠 Problem Statement
 
-Buying a laptop online can be overwhelming. With hundreds of options and technical specifications—RAM, GPU, processor, screen size, and more—users often struggle to identify which product truly suits their needs. Conventional e-commerce platforms rely heavily on filters and manual searching, which do not always align with what users *actually* mean or want.
+Users struggle to find the best laptops matching their budget and specs (e.g., RAM, price). My goal was to build a smart assistant that:
 
-## 🎯 Solution: BuyGenie
+* Understands user queries in natural language
+* Filters laptops based on specs (like under ₹50,000 with 8GB RAM)
+* Gives intelligent top-2 recommendations
+* Supports follow-up questions
+* 
+## 🎯 Solution: Smart AI-powered laptop recommendation assistant
 
-**BuyGenie** is an AI-powered e-commerce assistant built using LLMs (Large Language Models) to make laptop shopping intuitive, fast, and personalized. Whether you're a gamer, student, or professional, BuyGenie understands your intent and recommends the best options by deeply analyzing your query, product specs, and even your past behavior.
+I built an *AI-powered laptop recommendation assistant*  built using LLMs (Large Language Models) to make laptop shopping intuitive, fast, and personalized. Whether you're a gamer, student, or professional, it  understands your intent and recommends the best options by deeply analyzing your query, product specs, and even your past behavior.
+that helps users find the best laptops based on their *budget and specifications*, like price and RAM.
 
 ---
 
