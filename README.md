@@ -2,16 +2,17 @@
 
 ## 🧠 Problem Statement
 
-Users struggle to find the best laptops matching their budget and specs (e.g., RAM, price). My goal was to build a smart assistant that:
+Many users find it difficult to choose the right laptop that fits their needs, budget, and technical preferences. They often struggle with:
 
-* Understands user queries in natural language
-* Filters laptops based on specs (like under ₹50,000 with 8GB RAM)
-* Gives intelligent top-2 recommendations
-* Supports follow-up questions
+Comparing specs like RAM, processor, battery, etc.
+
+Finding laptops under a specific budget
+
+Understanding which model suits their use case (gaming, office, student)
 * 
 ## 🎯 Solution: Smart AI-powered laptop recommendation assistant
 
-I built an *AI-powered laptop recommendation assistant*  built using LLMs (Large Language Models) to make laptop shopping intuitive, fast, and personalized. Whether you're a gamer, student, or professional, it  understands your intent and recommends the best options by deeply analyzing your query, product specs, and even your past behavior.
+I built an *AI-powered laptop recommendation assistant*  using LLMs (Large Language Models) to make laptop shopping intuitive, fast, and personalized. Whether you're a gamer, student, or professional, it  understands your intent and recommends the best options by deeply analyzing your query, product specs, and even your past behavior.
 that helps users find the best laptops based on their *budget and specifications*, like price and RAM.
 
 ---
