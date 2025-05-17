@@ -1,3 +1,6 @@
+
+
+
 import os
 import sqlite3
 import pickle
@@ -13,6 +16,9 @@ INDEX_SAVE_PATH = 'embeddings/faiss.index'
 DF_SAVE_PATH = 'embeddings/laptop_dataframe.pkl'
 ID_MAP_SAVE_PATH = 'embeddings/id_map.pkl'
 EMBEDDING_MODEL_NAME = 'all-MiniLM-L6-v2'
+
+# Initialize embedding model once for reuse
+embedding_model = SentenceTransformer(EMBEDDING_MODEL_NAME)
 
 def fetch_laptop_data():
     conn = sqlite3.connect(DB_PATH)
@@ -33,9 +39,8 @@ def create_embedding_text(row):
     )
 
 def generate_embeddings(texts):
-    model = SentenceTransformer(EMBEDDING_MODEL_NAME)
-    embeddings = model.encode(texts, convert_to_numpy=True).astype('float32')
-    return embeddings, model
+    embeddings = embedding_model.encode(texts, convert_to_numpy=True).astype('float32')
+    return embeddings
 
 def save_index(index):
     os.makedirs(os.path.dirname(INDEX_SAVE_PATH), exist_ok=True)
@@ -58,7 +63,7 @@ def build_faiss_index():
     texts = df.apply(create_embedding_text, axis=1).tolist()
 
     print("[INFO] Generating embeddings...")
-    embeddings, model = generate_embeddings(texts)
+    embeddings = generate_embeddings(texts)
     print(f"[INFO] Generated {embeddings.shape[0]} embeddings of dim {embeddings.shape[1]}")
 
     print("[INFO] Building FAISS index...")
@@ -73,5 +78,25 @@ def build_faiss_index():
     print(f"[INFO] DataFrame saved at {DF_SAVE_PATH}")
     print(f"[INFO] ID map saved at {ID_MAP_SAVE_PATH}")
 
+# ==== New helper functions to load and use the index and embeddings ====
+
+def get_faiss_index():
+    if not os.path.exists(INDEX_SAVE_PATH):
+        raise FileNotFoundError(f"FAISS index not found at {INDEX_SAVE_PATH}")
+    index = faiss.read_index(INDEX_SAVE_PATH)
+    return index
+
+def get_id_map():
+    if not os.path.exists(ID_MAP_SAVE_PATH):
+        raise FileNotFoundError(f"ID map not found at {ID_MAP_SAVE_PATH}")
+    with open(ID_MAP_SAVE_PATH, "rb") as f:
+        id_map = pickle.load(f)
+    return id_map
+
+def get_embeddings(text: str):
+    embedding = embedding_model.encode(text, convert_to_numpy=True).astype('float32')
+    return embedding
+
 if __name__ == "__main__":
     build_faiss_index()
+
